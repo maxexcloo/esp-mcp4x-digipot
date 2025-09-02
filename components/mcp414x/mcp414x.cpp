@@ -145,5 +145,41 @@ bool MCP414X::decrement_wiper() {
   return false;
 }
 
+bool MCP414X::write_tcon_register(uint8_t value) {
+  this->enable();
+
+  // Create command byte: TCON address, write command, D8=0
+  uint8_t command_byte = this->create_command_byte(MCP414X_TCON_ADDRESS, MCP414X_WRITE_COMMAND, 0);
+
+  // Send 16-bit command: command byte + data byte
+  this->write_byte(command_byte);
+  this->write_byte(value);
+
+  this->disable();
+
+  ESP_LOGVV(TAG, "Wrote TCON register: command=0x%02X, data=0x%02X", command_byte, value);
+  return true;
+}
+
+bool MCP414X::set_terminal_connection(bool connect_a, bool connect_w, bool connect_b) {
+  uint8_t tcon_value = MCP414X_TCON_DEFAULT;  // Start with all bits set
+
+  // Clear bits for terminals that should be disconnected
+  if (!connect_a) {
+    tcon_value &= ~MCP414X_TCON_R0A;
+  }
+  if (!connect_w) {
+    tcon_value &= ~MCP414X_TCON_R0W;
+  }
+  if (!connect_b) {
+    tcon_value &= ~MCP414X_TCON_R0B;
+  }
+
+  ESP_LOGD(TAG, "Setting terminal connections - A:%s, W:%s, B:%s (TCON=0x%02X)",
+           connect_a ? "ON" : "OFF", connect_w ? "ON" : "OFF", connect_b ? "ON" : "OFF", tcon_value);
+
+  return this->write_tcon_register(tcon_value);
+}
+
 }  // namespace mcp414x
 }  // namespace esphome

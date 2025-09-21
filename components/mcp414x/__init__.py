@@ -3,7 +3,7 @@ from esphome.components import spi, number
 import esphome.config_validation as cv
 from esphome.const import CONF_ID, CONF_MIN_VALUE, CONF_MAX_VALUE, CONF_STEP
 
-CODEOWNERS = ["@example"]
+CODEOWNERS = ["@ellsclytn"]
 DEPENDENCIES = ["spi"]
 AUTO_LOAD = ["number", "fan"]
 MULTI_CONF = True

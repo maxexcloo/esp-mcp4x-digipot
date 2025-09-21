@@ -53,8 +53,8 @@ class MCP414X : public number::Number, public Component, public spi::SPIDevice<s
 
   uint8_t create_command_byte(uint8_t address, uint8_t command, uint8_t data_bits = 0);
 
-  uint8_t initial_value_{64};
-  uint8_t current_value_{64};
+  uint8_t initial_value_{0};
+  uint8_t current_value_{0};
 };
 
 }  // namespace mcp414x

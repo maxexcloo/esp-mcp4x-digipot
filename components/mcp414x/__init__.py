@@ -17,7 +17,7 @@ CONFIG_SCHEMA = (
     number.number_schema(MCP414X)
     .extend(
         {
-            cv.Optional(CONF_INITIAL_VALUE, default=64): cv.int_range(min=0, max=128),
+            cv.Optional(CONF_INITIAL_VALUE, default=0): cv.int_range(min=0, max=128),
             cv.Optional(CONF_MIN_VALUE, default=0): cv.int_range(min=0, max=128),
             cv.Optional(CONF_MAX_VALUE, default=128): cv.int_range(min=0, max=128),
             cv.Optional(CONF_STEP, default=1): cv.positive_int,

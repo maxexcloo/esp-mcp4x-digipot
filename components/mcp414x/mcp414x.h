@@ -30,7 +30,7 @@ static const uint8_t MCP414X_TCON_R0W = 0x04;  // Wiper connect bit (bit 2)
 static const uint8_t MCP414X_TCON_R0B = 0x02;  // Terminal B connect bit (bit 1)
 static const uint8_t MCP414X_TCON_DEFAULT = 0xFF;  // All terminals connected
 
-class MCP414X : public number::Number, public Component, public spi::SPIDevice<spi::BIT_ORDER_MSB_FIRST, spi::CLOCK_POLARITY_LOW, spi::CLOCK_PHASE_LEADING, spi::DATA_RATE_10MHZ> {
+class MCP414X : public number::Number, public Component, public spi::SPIDevice<spi::BIT_ORDER_MSB_FIRST, spi::CLOCK_POLARITY_LOW, spi::CLOCK_PHASE_LEADING, spi::DATA_RATE_1MHZ> {
  public:
   void setup() override;
   void dump_config() override;

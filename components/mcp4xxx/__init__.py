@@ -10,11 +10,11 @@ MULTI_CONF = True
 
 CONF_INITIAL_VALUE = "initial_value"
 
-mcp414x_ns = cg.esphome_ns.namespace("mcp414x")
-MCP414X = mcp414x_ns.class_("MCP414X", number.Number, cg.Component, spi.SPIDevice)
+mcp4xxx_ns = cg.esphome_ns.namespace("mcp4xxx")
+MCP4XXX = mcp4xxx_ns.class_("MCP4XXX", number.Number, cg.Component, spi.SPIDevice)
 
 CONFIG_SCHEMA = (
-    number.number_schema(MCP414X)
+    number.number_schema(MCP4XXX)
     .extend(
         {
             cv.Optional(CONF_INITIAL_VALUE, default=0): cv.int_range(min=0, max=128),

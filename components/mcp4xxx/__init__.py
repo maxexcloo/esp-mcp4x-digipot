@@ -18,9 +18,6 @@ CONFIG_SCHEMA = (
     .extend(
         {
             cv.Optional(CONF_INITIAL_VALUE, default=0): cv.int_range(min=0, max=128),
-            cv.Optional(CONF_MIN_VALUE, default=0): cv.int_range(min=0, max=128),
-            cv.Optional(CONF_MAX_VALUE, default=128): cv.int_range(min=0, max=128),
-            cv.Optional(CONF_STEP, default=1): cv.positive_int,
         }
     )
     .extend(cv.COMPONENT_SCHEMA)
@@ -31,9 +28,6 @@ CONFIG_SCHEMA = (
 async def to_code(config):
     var = await number.new_number(
         config,
-        min_value=config[CONF_MIN_VALUE],
-        max_value=config[CONF_MAX_VALUE],
-        step=config[CONF_STEP],
     )
     await cg.register_component(var, config)
     await spi.register_spi_device(var, config)

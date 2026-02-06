@@ -24,10 +24,12 @@ CONFIG_SCHEMA = (
     .extend(spi.spi_device_schema(cs_pin_required=True))
 )
 
-
 async def to_code(config):
     var = await number.new_number(
         config,
+        min_value=0,
+        max_value=128,
+        step=1
     )
     await cg.register_component(var, config)
     await spi.register_spi_device(var, config)
